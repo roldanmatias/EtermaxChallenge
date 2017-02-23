@@ -11,18 +11,26 @@ import UIKit
 class ECRedditTopTVC: UITableViewController {
 
     let cellIdentifier = "cell"
-    
     var reddit: ECReddit?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x:0.0, y:0.0, width: 40.0, height: 40.0);
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+
         ECDataService.sharedInstance.listTop { (reddit) in
             self.reddit = reddit
+            activityIndicator.stopAnimating()
             self.tableView.reloadData()
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

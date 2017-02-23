@@ -19,6 +19,7 @@
 		B922A0C71E5EAAFE00457982 /* ECRedditDataChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = B922A0C61E5EAAFE00457982 /* ECRedditDataChild.swift */; };
 		B922A0C91E5EABC400457982 /* ECRedditDataChildData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B922A0C81E5EABC400457982 /* ECRedditDataChildData.swift */; };
 		B922A0CC1E5EBCB900457982 /* ECTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B922A0CB1E5EBCB900457982 /* ECTopCell.swift */; };
+		B922A0CF1E5F338700457982 /* ECPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B922A0CE1E5F338700457982 /* ECPersistence.swift */; };
 		E21AAE6EED210F0D1D185FDD /* Pods_EtermaxChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE7E5784CB8D8410D423941 /* Pods_EtermaxChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		B922A0C61E5EAAFE00457982 /* ECRedditDataChild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ECRedditDataChild.swift; path = Model/ECRedditDataChild.swift; sourceTree = "<group>"; };
 		B922A0C81E5EABC400457982 /* ECRedditDataChildData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ECRedditDataChildData.swift; path = Model/ECRedditDataChildData.swift; sourceTree = "<group>"; };
 		B922A0CB1E5EBCB900457982 /* ECTopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ECTopCell.swift; path = Custom/ECTopCell.swift; sourceTree = "<group>"; };
+		B922A0CE1E5F338700457982 /* ECPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ECPersistence.swift; path = Persistence/ECPersistence.swift; sourceTree = "<group>"; };
 		DAB3E3402B23B0C2AE1717A7 /* Pods-EtermaxChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EtermaxChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EtermaxChallenge/Pods-EtermaxChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,10 +95,11 @@
 			isa = PBXGroup;
 			children = (
 				B922A0CA1E5EBC8D00457982 /* Custom */,
-				B922A0BF1E5EA68400457982 /* Model */,
-				B922A0BA1E5E9E1600457982 /* Network */,
-				B922A0B91E5E9E0A00457982 /* Services */,
 				B922A0B61E5E9C1500457982 /* ViewControllers */,
+				B922A0B91E5E9E0A00457982 /* Services */,
+				B922A0BF1E5EA68400457982 /* Model */,
+				B922A0CD1E5F328800457982 /* Persistence */,
+				B922A0BA1E5E9E1600457982 /* Network */,
 				B922A0A41E5E9A6B00457982 /* AppDelegate.swift */,
 				B922A0A81E5E9A6B00457982 /* Main.storyboard */,
 				B922A0AB1E5E9A6B00457982 /* Assets.xcassets */,
@@ -147,6 +150,14 @@
 				B922A0CB1E5EBCB900457982 /* ECTopCell.swift */,
 			);
 			name = Custom;
+			sourceTree = "<group>";
+		};
+		B922A0CD1E5F328800457982 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				B922A0CE1E5F338700457982 /* ECPersistence.swift */,
+			);
+			name = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +288,7 @@
 				B922A0CC1E5EBCB900457982 /* ECTopCell.swift in Sources */,
 				B922A0C91E5EABC400457982 /* ECRedditDataChildData.swift in Sources */,
 				B922A0B81E5E9D2000457982 /* ECRedditTopTVC.swift in Sources */,
+				B922A0CF1E5F338700457982 /* ECPersistence.swift in Sources */,
 				B922A0C51E5EAAA500457982 /* ECRedditData.swift in Sources */,
 				B922A0BE1E5E9E7E00457982 /* ECRequest.swift in Sources */,
 				B922A0C31E5EAA3300457982 /* ECReddit.swift in Sources */,

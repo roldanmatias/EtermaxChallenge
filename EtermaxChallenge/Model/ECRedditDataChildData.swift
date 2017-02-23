@@ -13,7 +13,7 @@ import AlamofireObjectMapper.Swift
 import Foundation
 import ObjectMapper
 
-public class ECRedditDataChildData: Mappable {
+public class ECRedditDataChildData: NSObject, Mappable, NSCoding {
     
     var title: String?
     var author: String?
@@ -33,5 +33,23 @@ public class ECRedditDataChildData: Mappable {
         thumbnail <- map["thumbnail"]
         num_comments <- map["num_comments"]
         subreddit <- map["subreddit"]
+    }
+    
+    required public init(coder decoder: NSCoder) {
+        self.title = decoder.decodeObject(forKey: "title") as? String
+        self.author = decoder.decodeObject(forKey: "author") as? String
+        self.thumbnail = decoder.decodeObject(forKey: "thumbnail") as? String
+        self.subreddit = decoder.decodeObject(forKey: "subreddit") as? String
+        self.num_comments = decoder.decodeObject(forKey: "num_comments") as? UInt
+        self.created = decoder.decodeObject(forKey: "created") as? Double
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(self.title, forKey: "title")
+        coder.encode(self.author, forKey: "author")
+        coder.encode(self.thumbnail, forKey: "thumbnail")
+        coder.encode(self.subreddit, forKey: "subreddit")
+        coder.encode(self.created, forKey: "created")
+        coder.encode(self.num_comments, forKey: "num_comments")
     }
 }

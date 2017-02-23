@@ -13,7 +13,7 @@ import AlamofireObjectMapper.Swift
 import Foundation
 import ObjectMapper
 
-public class ECReddit: Mappable {
+public class ECReddit: NSObject, Mappable, NSCoding {
     
     var data: ECRedditData?
     
@@ -23,5 +23,13 @@ public class ECReddit: Mappable {
     
     public func mapping(map: Map) {
         data <- map["data"]
+    }
+    
+    required public init(coder decoder: NSCoder) {
+        self.data = decoder.decodeObject(forKey: "data") as? ECRedditData
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(self.data, forKey: "data")
     }
 }

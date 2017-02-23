@@ -17,8 +17,16 @@ class ECDataService: NSObject {
     }
     
     func listTop(completionHandler: @escaping (ECReddit?) -> Void) {
+        
+        if let savedReddit = ECPersistence.sharedInstance.get() {
+            completionHandler(savedReddit)
+        }
+        
         ECRequest.sharedInstance.requestTop { (response) in
-            completionHandler(response)
+            if let reddit = response {
+                ECPersistence.sharedInstance.save(reddit: reddit)
+                completionHandler(response)
+            }
         }
     }
 }
