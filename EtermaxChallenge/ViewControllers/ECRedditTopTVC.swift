@@ -12,11 +12,11 @@ class ECRedditTopTVC: UITableViewController {
 
     let cellIdentifier = "cell"
     var reddit: ECReddit?
+    let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
         activityIndicator.frame = CGRect(x:0.0, y:0.0, width: 40.0, height: 40.0);
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -26,8 +26,27 @@ class ECRedditTopTVC: UITableViewController {
 
         ECDataService.sharedInstance.listTop { (reddit) in
             self.reddit = reddit
-            activityIndicator.stopAnimating()
+            self.activityIndicator.stopAnimating()
             self.tableView.reloadData()
+        }
+    }
+    
+    func loadMore() {
+        self.activityIndicator.startAnimating()
+        
+        ECDataService.sharedInstance.listMore { (reddit) in
+            
+            let lastIndexPosition = self.reddit?.data?.children?.count ?? 0
+            
+            self.reddit = reddit
+            self.activityIndicator.stopAnimating()
+            self.tableView.reloadData()
+            
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                let inx = IndexPath(row: lastIndexPosition, section: 0)
+                self.tableView.scrollToRow(at: inx, at: .bottom, animated: true)
+            }
         }
     }
     
@@ -53,4 +72,15 @@ class ECRedditTopTVC: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let rowsCount = 25
+        let resultCount = self.reddit?.data?.children?.count ?? 0
+        
+        if rowsCount > resultCount && indexPath.row == (resultCount - 1) {
+            loadMore()
+        }
+    }
+
 }

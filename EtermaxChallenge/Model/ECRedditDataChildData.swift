@@ -15,6 +15,7 @@ import ObjectMapper
 
 public class ECRedditDataChildData: NSObject, Mappable, NSCoding {
     
+    var name: String?
     var title: String?
     var author: String?
     var created: Double?
@@ -27,6 +28,7 @@ public class ECRedditDataChildData: NSObject, Mappable, NSCoding {
     }
     
     public func mapping(map: Map) {
+        name <- map["name"]
         title <- map["title"]
         author <- map["author"]
         created <- map["created"]
@@ -36,6 +38,7 @@ public class ECRedditDataChildData: NSObject, Mappable, NSCoding {
     }
     
     required public init(coder decoder: NSCoder) {
+        self.name = decoder.decodeObject(forKey: "name") as? String
         self.title = decoder.decodeObject(forKey: "title") as? String
         self.author = decoder.decodeObject(forKey: "author") as? String
         self.thumbnail = decoder.decodeObject(forKey: "thumbnail") as? String
@@ -45,6 +48,7 @@ public class ECRedditDataChildData: NSObject, Mappable, NSCoding {
     }
     
     public func encode(with coder: NSCoder) {
+        coder.encode(self.name, forKey: "name")
         coder.encode(self.title, forKey: "title")
         coder.encode(self.author, forKey: "author")
         coder.encode(self.thumbnail, forKey: "thumbnail")

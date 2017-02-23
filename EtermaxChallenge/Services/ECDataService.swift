@@ -29,4 +29,19 @@ class ECDataService: NSObject {
             }
         }
     }
+    
+    func listMore(completionHandler: @escaping (ECReddit?) -> Void) {
+        
+        if let savedReddit = ECPersistence.sharedInstance.get(), let savedRedditData = savedReddit.data, let savedChildren = savedRedditData.children {
+            let lastElementLoaded = savedChildren.last?.data?.name ?? ""
+            
+            ECRequest.sharedInstance.requestTop(after: lastElementLoaded) { (response) in
+                if let reddit = response, let redditData = reddit.data, let newChildren = redditData.children {
+                    savedReddit.data?.children? += newChildren
+                    ECPersistence.sharedInstance.save(reddit: savedReddit)
+                    completionHandler(savedReddit)
+                }
+            }
+        }
+    }
 }

@@ -17,16 +17,21 @@ class ECRequest: NSObject {
 
     static let sharedInstance = ECRequest()
     
-    let urlString = "https://www.reddit.com/top/.json?count=25"
-    //https://www.reddit.com/top/?count=25&after=t3_5vi950
+    let urlString = "https://www.reddit.com/top/.json?limit=10&after="
     
     private override init() {
         super.init()
     }
     
-    func requestTop(completionHandler: @escaping (ECReddit?) -> Void) {
+    func requestTop(after: String? = nil, completionHandler: @escaping (ECReddit?) -> Void) {
 
-        Alamofire.request(urlString, method: .get, parameters: nil, headers: nil).responseObject { ( response : DataResponse <ECReddit>) in
+        var apiRequest = urlString
+        
+        if let after = after {
+            apiRequest.append(after)
+        }
+        
+        Alamofire.request(apiRequest, method: .get, parameters: nil, headers: nil).responseObject { ( response : DataResponse <ECReddit>) in
 
             completionHandler(response.result.value)
         }
